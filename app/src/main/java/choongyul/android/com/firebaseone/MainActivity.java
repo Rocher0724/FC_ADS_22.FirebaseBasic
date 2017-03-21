@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             // ...
         }
-//mPostReference.addValueEventListener(postListener);
     };
 
 
@@ -88,15 +87,13 @@ public class MainActivity extends AppCompatActivity {
             String title = etTitle.getText().toString();
             String content = etContent.getText().toString();
 
-            // 1. bbs 레퍼런스(테이블) 의 키를 생성
-            String key = bbsRef.push().getKey();
+            // 1. bbs 레퍼런스(테이블) 의 키를 생성하고 자신의 레퍼런스를 넘겨준다.
+            DatabaseReference keyRef =bbsRef.push();
             // 2. 입력될 키, 값 세트(레코드) 를 생성
             Map<String, String> postValues = new HashMap<>();
             postValues.put("title", title);
             postValues.put("content", content);
             // 3. 생성된 레코드를 데이터베이스에 입력
-            DatabaseReference keyRef = bbsRef.child(key);
-
             keyRef.setValue( postValues );
 
         }
